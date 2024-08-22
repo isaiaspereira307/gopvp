@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 	"time"
 )
 
@@ -32,8 +31,8 @@ INSERT INTO objectives (id, user_id, category_id, subcategory_id, how_am_i, how_
 type CreateObjectiveParams struct {
 	ID             int32
 	UserID         int32
-	CategoryID     sql.NullInt32
-	SubcategoryID  sql.NullInt32
+	CategoryID     int32
+	SubcategoryID  int32
 	HowAmI         string
 	HowDoIWantToBe string
 	WhatWillIDo    string
@@ -246,7 +245,7 @@ const getObjectivesByCategoryId = `-- name: GetObjectivesByCategoryId :many
 SELECT id, user_id, category_id, subcategory_id, how_am_i, how_do_i_want_to_be, what_will_i_do, when_will_i_do_it FROM objectives WHERE category_id = $1
 `
 
-func (q *Queries) GetObjectivesByCategoryId(ctx context.Context, categoryID sql.NullInt32) ([]Objective, error) {
+func (q *Queries) GetObjectivesByCategoryId(ctx context.Context, categoryID int32) ([]Objective, error) {
 	rows, err := q.db.QueryContext(ctx, getObjectivesByCategoryId, categoryID)
 	if err != nil {
 		return nil, err
@@ -283,8 +282,8 @@ SELECT id, user_id, category_id, subcategory_id, how_am_i, how_do_i_want_to_be, 
 `
 
 type GetObjectivesByCategoryIdAndSubcategoryIdParams struct {
-	CategoryID    sql.NullInt32
-	SubcategoryID sql.NullInt32
+	CategoryID    int32
+	SubcategoryID int32
 }
 
 func (q *Queries) GetObjectivesByCategoryIdAndSubcategoryId(ctx context.Context, arg GetObjectivesByCategoryIdAndSubcategoryIdParams) ([]Objective, error) {
@@ -323,7 +322,7 @@ const getObjectivesBySubcategoryId = `-- name: GetObjectivesBySubcategoryId :man
 SELECT id, user_id, category_id, subcategory_id, how_am_i, how_do_i_want_to_be, what_will_i_do, when_will_i_do_it FROM objectives WHERE subcategory_id = $1
 `
 
-func (q *Queries) GetObjectivesBySubcategoryId(ctx context.Context, subcategoryID sql.NullInt32) ([]Objective, error) {
+func (q *Queries) GetObjectivesBySubcategoryId(ctx context.Context, subcategoryID int32) ([]Objective, error) {
 	rows, err := q.db.QueryContext(ctx, getObjectivesBySubcategoryId, subcategoryID)
 	if err != nil {
 		return nil, err
@@ -397,7 +396,7 @@ SELECT id, user_id, category_id, subcategory_id, how_am_i, how_do_i_want_to_be, 
 
 type GetObjectivesByUserIdAndCategoryIdParams struct {
 	UserID     int32
-	CategoryID sql.NullInt32
+	CategoryID int32
 }
 
 func (q *Queries) GetObjectivesByUserIdAndCategoryId(ctx context.Context, arg GetObjectivesByUserIdAndCategoryIdParams) ([]Objective, error) {
@@ -438,8 +437,8 @@ SELECT id, user_id, category_id, subcategory_id, how_am_i, how_do_i_want_to_be, 
 
 type GetObjectivesByUserIdAndCategoryIdAndSubcategoryIdParams struct {
 	UserID        int32
-	CategoryID    sql.NullInt32
-	SubcategoryID sql.NullInt32
+	CategoryID    int32
+	SubcategoryID int32
 }
 
 func (q *Queries) GetObjectivesByUserIdAndCategoryIdAndSubcategoryId(ctx context.Context, arg GetObjectivesByUserIdAndCategoryIdAndSubcategoryIdParams) ([]Objective, error) {
@@ -481,7 +480,7 @@ SELECT id, user_id, category_id, subcategory_id, how_am_i, how_do_i_want_to_be, 
 
 type GetObjectivesByUserIdAndSubcategoryIdParams struct {
 	UserID        int32
-	SubcategoryID sql.NullInt32
+	SubcategoryID int32
 }
 
 func (q *Queries) GetObjectivesByUserIdAndSubcategoryId(ctx context.Context, arg GetObjectivesByUserIdAndSubcategoryIdParams) ([]Objective, error) {
@@ -668,8 +667,8 @@ UPDATE objectives SET user_id = $2, category_id = $3, subcategory_id = $4, how_a
 type UpdateObjectiveParams struct {
 	ID             int32
 	UserID         int32
-	CategoryID     sql.NullInt32
-	SubcategoryID  sql.NullInt32
+	CategoryID     int32
+	SubcategoryID  int32
 	HowAmI         string
 	HowDoIWantToBe string
 	WhatWillIDo    string

@@ -5,7 +5,6 @@
 package db
 
 import (
-	"database/sql"
 	"time"
 )
 
@@ -17,8 +16,8 @@ type Category struct {
 type Objective struct {
 	ID             int32
 	UserID         int32
-	CategoryID     sql.NullInt32
-	SubcategoryID  sql.NullInt32
+	CategoryID     int32
+	SubcategoryID  int32
 	HowAmI         string
 	HowDoIWantToBe string
 	WhatWillIDo    string

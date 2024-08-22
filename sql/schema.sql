@@ -21,8 +21,8 @@ CREATE TABLE subcategory (
 CREATE TABLE objectives (
     id SERIAL NOT NULL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users (id) DEFERRABLE INITIALLY DEFERRED,
-    category_id INTEGER REFERENCES category(id),
-    subcategory_id INTEGER REFERENCES subcategory(id),
+    category_id INTEGER NOT NULL REFERENCES category(id),
+    subcategory_id INTEGER NOT NULL REFERENCES subcategory(id),
     how_am_i TEXT NOT NULL,
     how_do_i_want_to_be TEXT NOT NULL,
     what_will_i_do TEXT NOT NULL,
