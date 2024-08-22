@@ -1,4 +1,178 @@
 definitions:
+  db.Category:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  db.Objective:
+    properties:
+      categoryID:
+        type: integer
+      howAmI:
+        type: string
+      howDoIWantToBe:
+        type: string
+      id:
+        type: integer
+      subcategoryID:
+        type: integer
+      userID:
+        type: integer
+      whatWillIDo:
+        type: string
+      whenWillIDoIt:
+        type: string
+    type: object
+  db.Subcategory:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  db.User:
+    properties:
+      dateJoined:
+        type: string
+      email:
+        type: string
+      firstName:
+        type: string
+      id:
+        type: integer
+      isActive:
+        type: boolean
+      isStaff:
+        type: boolean
+      isSuperuser:
+        type: boolean
+      lastLogin:
+        type: string
+      lastName:
+        type: string
+      password:
+        type: string
+    type: object
+  github_com_isaiaspereira307_gopvp_handlers.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    type: object
+  github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    type: object
+  github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    type: object
+  github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    type: object
+  github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    type: object
+  handlers.CreateCategoryRequest:
+    properties:
+      name:
+        type: string
+    required:
+    - name
+    type: object
+  handlers.CreateCategoryResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Category'
+      message:
+        type: string
+    type: object
+  handlers.CreateObjectiveRequest:
+    properties:
+      category_id:
+        type: integer
+      how_am_i:
+        type: string
+      how_do_i_want_to_be:
+        type: string
+      subcategory_id:
+        type: integer
+      user_id:
+        type: integer
+      what_will_i_do:
+        type: string
+      when_will_i_do_it:
+        type: string
+    required:
+    - category_id
+    - how_am_i
+    - how_do_i_want_to_be
+    - subcategory_id
+    - user_id
+    - what_will_i_do
+    - when_will_i_do_it
+    type: object
+  handlers.CreateObjectiveResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Objective'
+      message:
+        type: string
+    type: object
+  handlers.CreateSubcategoryRequest:
+    properties:
+      name:
+        type: string
+    required:
+    - name
+    type: object
+  handlers.CreateSubcategoryResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Subcategory'
+      message:
+        type: string
+    type: object
+  handlers.CreateUserRequest:
+    properties:
+      email:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - first_name
+    - last_name
+    - password
+    type: object
+  handlers.CreateUserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.User'
+      message:
+        type: string
+    type: object
   handlers.CredentialsRequest:
     properties:
       email:
@@ -9,10 +183,58 @@ definitions:
     - email
     - password
     type: object
-  handlers.ErrorResponse:
+  handlers.DeleteCategoryResponse:
     properties:
-      error_code:
+      data:
+        $ref: '#/definitions/db.Category'
+      message:
         type: string
+    type: object
+  handlers.DeleteObjectiveResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Objective'
+      message:
+        type: string
+    type: object
+  handlers.DeleteSubcategoryResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Subcategory'
+      message:
+        type: string
+    type: object
+  handlers.DeleteUserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.User'
+      message:
+        type: string
+    type: object
+  handlers.ListCategoryResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/db.Category'
+        type: array
+      message:
+        type: string
+    type: object
+  handlers.ListObjectiveResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/db.Objective'
+        type: array
+      message:
+        type: string
+    type: object
+  handlers.ListUserResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/db.User'
+        type: array
       message:
         type: string
     type: object
@@ -23,9 +245,276 @@ definitions:
       message:
         type: string
     type: object
+  handlers.ShowCategoryResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Category'
+      message:
+        type: string
+    type: object
+  handlers.ShowObjectiveResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Objective'
+      message:
+        type: string
+    type: object
+  handlers.ShowSubcategoryResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Subcategory'
+      message:
+        type: string
+    type: object
+  handlers.ShowUserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.User'
+      message:
+        type: string
+    type: object
+  handlers.UpdateCategoryRequest:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    required:
+    - id
+    - name
+    type: object
+  handlers.UpdateCategoryResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Category'
+      message:
+        type: string
+    type: object
+  handlers.UpdateObjectiveRequest:
+    properties:
+      category_id:
+        type: integer
+      how_am_i:
+        type: string
+      how_do_i_want_to_be:
+        type: string
+      id:
+        type: integer
+      subcategory_id:
+        type: integer
+      user_id:
+        type: integer
+      what_will_i_do:
+        type: string
+      when_will_i_do_it:
+        type: string
+    required:
+    - category_id
+    - how_am_i
+    - how_do_i_want_to_be
+    - id
+    - subcategory_id
+    - user_id
+    - what_will_i_do
+    - when_will_i_do_it
+    type: object
+  handlers.UpdateObjectiveResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Objective'
+      message:
+        type: string
+    type: object
+  handlers.UpdateSubcategoryRequest:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    required:
+    - id
+    - name
+    type: object
+  handlers.UpdateSubcategoryResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.Subcategory'
+      message:
+        type: string
+    type: object
+  handlers.UpdateUserRequest:
+    properties:
+      first_name:
+        type: string
+      id:
+        type: integer
+      last_name:
+        type: string
+      password:
+        type: string
+    required:
+    - first_name
+    - id
+    - last_name
+    - password
+    type: object
+  handlers.UpdateUserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/db.User'
+      message:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
+  /categories:
+    get:
+      consumes:
+      - application/json
+      description: Show all Categories
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ListCategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
+      summary: Show Categories
+      tags:
+      - category
+  /category:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a Category
+      parameters:
+      - description: Delete Category Param
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.DeleteCategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
+      summary: Delete a Category
+      tags:
+      - category
+    get:
+      consumes:
+      - application/json
+      description: Show a Category
+      parameters:
+      - description: Show Category Request
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ShowCategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
+      summary: Show Category
+      tags:
+      - category
+    post:
+      consumes:
+      - application/json
+      description: Create a Category
+      parameters:
+      - description: Create Category Params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateCategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.CreateCategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
+      summary: Create a Category
+      tags:
+      - category
+    put:
+      consumes:
+      - application/json
+      description: Update an Category
+      parameters:
+      - description: Category ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Update Category Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateCategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.UpdateCategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
+      summary: Update an Category
+      tags:
+      - category
   /login:
     post:
       consumes:
@@ -48,12 +537,453 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handlers.ErrorResponse'
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handlers.ErrorResponse'
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers.ErrorResponse'
       summary: Login
       tags:
       - login
+  /objective:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an Objective
+      parameters:
+      - description: Delete Objective Param
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.DeleteObjectiveResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
+      summary: Delete an Objective
+      tags:
+      - objective
+    get:
+      consumes:
+      - application/json
+      description: Show an Objective
+      parameters:
+      - description: Show Objective Request
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ShowObjectiveResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
+      summary: Show Objective
+      tags:
+      - objective
+    post:
+      consumes:
+      - application/json
+      description: Create an Objective
+      parameters:
+      - description: Create Objective Params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateObjectiveRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.CreateObjectiveResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
+      summary: Create an Objective
+      tags:
+      - objective
+    put:
+      consumes:
+      - application/json
+      description: Update an Objective
+      parameters:
+      - description: Objective ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Update Objective Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateObjectiveRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.UpdateObjectiveResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
+      summary: Update an Objective
+      tags:
+      - objective
+  /objectives:
+    get:
+      consumes:
+      - application/json
+      description: Show all Objectives
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ListObjectiveResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
+      summary: Show Objectives
+      tags:
+      - objective
+  /subcategories:
+    get:
+      consumes:
+      - application/json
+      description: Show all Subcategories
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ListUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
+      summary: Show Subcategories
+      tags:
+      - subcategory
+  /subcategory:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an Subcategory
+      parameters:
+      - description: Delete Subcategory Param
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.DeleteSubcategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
+      summary: Delete an Subcategory
+      tags:
+      - subcategory
+    get:
+      consumes:
+      - application/json
+      description: Show an Subcategory
+      parameters:
+      - description: Show Subcategory Request
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ShowSubcategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
+      summary: Show Subcategory
+      tags:
+      - subcategory
+    post:
+      consumes:
+      - application/json
+      description: Create an Subcategory
+      parameters:
+      - description: Create Subcategory Params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateSubcategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.CreateSubcategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
+      summary: Create an Subcategory
+      tags:
+      - subcategory
+    put:
+      consumes:
+      - application/json
+      description: Update an Subcategory
+      parameters:
+      - description: Subcategory ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Update Subcategory Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateSubcategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.UpdateSubcategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
+      summary: Update an Subcategory
+      tags:
+      - subcategory
+  /user:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an user
+      parameters:
+      - description: Delete User Param
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.DeleteUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
+      summary: Delete an user
+      tags:
+      - user
+    get:
+      consumes:
+      - application/json
+      description: Show an user
+      parameters:
+      - description: Show User Request
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ShowUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
+      summary: Show user
+      tags:
+      - user
+    post:
+      consumes:
+      - application/json
+      description: Create an user
+      parameters:
+      - description: Create User Params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.CreateUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
+      summary: Create an user
+      tags:
+      - user
+    put:
+      consumes:
+      - application/json
+      description: Update an user
+      parameters:
+      - description: User ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Update User Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.UpdateUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
+      summary: Update an user
+      tags:
+      - user
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: Show all users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ListUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
+      summary: Show users
+      tags:
+      - user
 swagger: "2.0"
