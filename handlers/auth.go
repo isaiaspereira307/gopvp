@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/isaiaspereira307/gopvp/configs"
 	"github.com/isaiaspereira307/gopvp/internal/db"
+	"golang.org/x/crypto/bcrypt"
 
 	"github.com/golang-jwt/jwt/v5"
 )
@@ -31,6 +32,17 @@ func Login(ctx *gin.Context, queries *db.Queries) {
 	err := creds.Validate()
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid credentials"})
+		return
+	}
+
+	user, err := queries.GetUserByEmail(ctx, creds.Email)
+	if err != nil {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"error": "invalid credentials"})
+		return
+	}
+
+	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(creds.Password)); err != nil {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"error": "invalid credentials"})
 		return
 	}
 
