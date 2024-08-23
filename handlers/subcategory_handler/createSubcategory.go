@@ -2,10 +2,23 @@ package handlers
 
 import (
 	"net/http"
+	"sync"
 
 	"github.com/gin-gonic/gin"
 	"github.com/isaiaspereira307/gopvp/internal/db"
 )
+
+var (
+	lastID int32
+	mu     sync.Mutex
+)
+
+func generateUniqueID() int32 {
+	mu.Lock()
+	defer mu.Unlock()
+	lastID++
+	return lastID
+}
 
 // @BasePath /api/v1
 // @Summary Create an Subcategory
@@ -25,6 +38,7 @@ func CreateSubcategory(ctx *gin.Context) {
 		return
 	}
 	subcategoy := db.CreateSubcategoryParams{
+		ID:   generateUniqueID(),
 		Name: req.Name,
 	}
 	err := queries.CreateSubcategory(ctx, subcategoy)

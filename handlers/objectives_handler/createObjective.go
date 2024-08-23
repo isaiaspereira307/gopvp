@@ -2,10 +2,23 @@ package handlers
 
 import (
 	"net/http"
+	"sync"
 
 	"github.com/gin-gonic/gin"
 	"github.com/isaiaspereira307/gopvp/internal/db"
 )
+
+var (
+	lastID int32
+	mu     sync.Mutex
+)
+
+func generateUniqueID() int32 {
+	mu.Lock()
+	defer mu.Unlock()
+	lastID++
+	return lastID
+}
 
 // @BasePath /api/v1
 // @Summary Create an Objective
@@ -32,6 +45,7 @@ func CreateObjective(ctx *gin.Context) {
 	}
 
 	objective := db.CreateObjectiveParams{
+		ID:             generateUniqueID(),
 		UserID:         req.UserID,
 		CategoryID:     req.CategoryID,
 		SubcategoryID:  req.SubcategoryID,

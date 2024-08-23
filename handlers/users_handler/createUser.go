@@ -2,11 +2,25 @@ package handlers
 
 import (
 	"net/http"
+	"sync"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/isaiaspereira307/gopvp/internal/db"
+	"golang.org/x/crypto/bcrypt"
 )
+
+var (
+	lastID int32
+	mu     sync.Mutex
+)
+
+func generateUniqueID() int32 {
+	mu.Lock()
+	defer mu.Unlock()
+	lastID++
+	return lastID
+}
 
 // @BasePath /api/v1
 // @Summary Create an user
@@ -18,25 +32,26 @@ import (
 // @Success 200 {object} CreateUserResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
-// @Router /user [post]
+// @Router /users [post]
 func CreateUser(ctx *gin.Context) {
 	var req CreateUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		sendErr(ctx, err, http.StatusBadRequest)
 		return
 	}
-	users, err := queries.GetUsers(ctx)
+
+	hashedPassword, err := hashPassword(req.Password)
 	if err != nil {
 		sendErr(ctx, err, http.StatusInternalServerError)
 		return
 	}
-	id := len(users) + 1
+
 	user := db.CreateUserParams{
-		ID:          int32(id),
+		ID:          generateUniqueID(),
 		FirstName:   req.FirstName,
 		LastName:    req.LastName,
 		Email:       req.Email,
-		Password:    req.Password,
+		Password:    hashedPassword,
 		IsActive:    true,
 		IsStaff:     false,
 		IsSuperuser: false,
@@ -51,4 +66,9 @@ func CreateUser(ctx *gin.Context) {
 	}
 
 	sendSuccess(ctx, "createUser", req)
+}
+
+func hashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
 }
