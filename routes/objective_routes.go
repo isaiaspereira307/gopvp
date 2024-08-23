@@ -5,13 +5,10 @@ import (
 	objectives_handler "github.com/isaiaspereira307/gopvp/handlers/objectives_handler"
 )
 
-func InitializeObjectiveRoutes(router *gin.Engine) {
-	v1 := router.Group("/api/v1")
-	{
-		v1.GET("/objective/:id", objectives_handler.GetObjective)
-		v1.GET("/objectives", objectives_handler.GetObjectives)
-		v1.POST("/objective", objectives_handler.CreateObjective)
-		v1.PUT("/objective/:id", objectives_handler.UpdateObjective)
-		v1.DELETE("/objective/:id", objectives_handler.DeleteObjective)
-	}
+func InitializeObjectiveRoutes(router *gin.RouterGroup) {
+	router.GET("/objective/:id", objectives_handler.GetObjective)
+	router.GET("/objectives", objectives_handler.GetObjectives)
+	router.POST("/objective", objectives_handler.CreateObjective)
+	router.PUT("/objective/:id", objectives_handler.UpdateObjective)
+	router.DELETE("/objective/:id", objectives_handler.DeleteObjective)
 }

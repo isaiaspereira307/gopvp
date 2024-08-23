@@ -5,13 +5,10 @@ import (
 	category_handler "github.com/isaiaspereira307/gopvp/handlers/category_handler"
 )
 
-func InitializeCategoryRoutes(router *gin.Engine) {
-	v1 := router.Group("/api/v1")
-	{
-		v1.GET("/category/:id", category_handler.GetCategory)
-		v1.GET("/categories", category_handler.GetCategories)
-		v1.POST("/category", category_handler.CreateCategory)
-		v1.PUT("/category/:id", category_handler.UpdateCategory)
-		v1.DELETE("/category/:id", category_handler.DeleteCategory)
-	}
+func InitializeCategoryRoutes(router *gin.RouterGroup) {
+	router.GET("/category/:id", category_handler.GetCategory)
+	router.GET("/categories", category_handler.GetCategories)
+	router.POST("/category", category_handler.CreateCategory)
+	router.PUT("/category/:id", category_handler.UpdateCategory)
+	router.DELETE("/category/:id", category_handler.DeleteCategory)
 }
