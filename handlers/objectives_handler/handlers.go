@@ -6,6 +6,6 @@ import (
 
 var queries *db.Queries
 
-func InitializeUserHandlers(q *db.Queries) {
+func InitializeObjectiveHandlers(q *db.Queries) {
 	queries = q
 }

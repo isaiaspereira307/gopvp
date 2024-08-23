@@ -6,6 +6,6 @@ import (
 
 var queries *db.Queries
 
-func InitializeSubCategoryHandlers(q *db.Queries) {
+func InitializeSubcategoryHandlers(q *db.Queries) {
 	queries = q
 }
