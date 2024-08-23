@@ -14,14 +14,14 @@ import (
 // @Tags category
 // @Accept json
 // @Produce json
-// @Param id query string true "Category ID"
+// @Param id path string true "Category ID"
 // @Param request body UpdateCategoryRequest true "Update Category Request"
 // @Success 200 {object} UpdateCategoryResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
-// @Router /category [put]
-func UpdateCategory(ctx *gin.Context, queries *db.Queries) {
+// @Router /category/{id} [put]
+func UpdateCategory(ctx *gin.Context) {
 	var req UpdateCategoryRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, ErrorResponse{Message: "invalid request"})

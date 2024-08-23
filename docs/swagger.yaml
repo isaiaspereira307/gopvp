@@ -392,62 +392,6 @@ paths:
       tags:
       - category
   /category:
-    delete:
-      consumes:
-      - application/json
-      description: Delete a Category
-      parameters:
-      - description: Delete Category Param
-        in: query
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handlers.DeleteCategoryResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
-      summary: Delete a Category
-      tags:
-      - category
-    get:
-      consumes:
-      - application/json
-      description: Show a Category
-      parameters:
-      - description: Show Category Request
-        in: query
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handlers.ShowCategoryResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
-      summary: Show Category
-      tags:
-      - category
     post:
       consumes:
       - application/json
@@ -477,13 +421,70 @@ paths:
       summary: Create a Category
       tags:
       - category
+  /category/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a Category
+      parameters:
+      - description: Delete Category Param
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.DeleteCategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
+      summary: Delete a Category
+      tags:
+      - category
+    get:
+      consumes:
+      - application/json
+      description: Show a Category
+      parameters:
+      - description: Show Category Request
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ShowCategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse'
+      summary: Show Category
+      tags:
+      - category
     put:
       consumes:
       - application/json
       description: Update an Category
       parameters:
       - description: Category ID
-        in: query
+        in: path
         name: id
         required: true
         type: string
@@ -546,62 +547,6 @@ paths:
       tags:
       - login
   /objective:
-    delete:
-      consumes:
-      - application/json
-      description: Delete an Objective
-      parameters:
-      - description: Delete Objective Param
-        in: query
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handlers.DeleteObjectiveResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
-      summary: Delete an Objective
-      tags:
-      - objective
-    get:
-      consumes:
-      - application/json
-      description: Show an Objective
-      parameters:
-      - description: Show Objective Request
-        in: query
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handlers.ShowObjectiveResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
-      summary: Show Objective
-      tags:
-      - objective
     post:
       consumes:
       - application/json
@@ -631,13 +576,70 @@ paths:
       summary: Create an Objective
       tags:
       - objective
+  /objective/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an Objective
+      parameters:
+      - description: Delete Objective Param
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.DeleteObjectiveResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
+      summary: Delete an Objective
+      tags:
+      - objective
+    get:
+      consumes:
+      - application/json
+      description: Show an Objective
+      parameters:
+      - description: Show Objective Request
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ShowObjectiveResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse'
+      summary: Show Objective
+      tags:
+      - objective
     put:
       consumes:
       - application/json
       description: Update an Objective
       parameters:
       - description: Objective ID
-        in: query
+        in: path
         name: id
         required: true
         type: string
@@ -716,62 +718,6 @@ paths:
       tags:
       - subcategory
   /subcategory:
-    delete:
-      consumes:
-      - application/json
-      description: Delete an Subcategory
-      parameters:
-      - description: Delete Subcategory Param
-        in: query
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handlers.DeleteSubcategoryResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
-      summary: Delete an Subcategory
-      tags:
-      - subcategory
-    get:
-      consumes:
-      - application/json
-      description: Show an Subcategory
-      parameters:
-      - description: Show Subcategory Request
-        in: query
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handlers.ShowSubcategoryResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
-      summary: Show Subcategory
-      tags:
-      - subcategory
     post:
       consumes:
       - application/json
@@ -801,13 +747,70 @@ paths:
       summary: Create an Subcategory
       tags:
       - subcategory
+  /subcategory/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an Subcategory
+      parameters:
+      - description: Delete Subcategory Param
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.DeleteSubcategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
+      summary: Delete an Subcategory
+      tags:
+      - subcategory
+    get:
+      consumes:
+      - application/json
+      description: Show an Subcategory
+      parameters:
+      - description: Show Subcategory Request
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ShowSubcategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_subcategory_handler.ErrorResponse'
+      summary: Show Subcategory
+      tags:
+      - subcategory
     put:
       consumes:
       - application/json
       description: Update an Subcategory
       parameters:
       - description: Subcategory ID
-        in: query
+        in: path
         name: id
         required: true
         type: string
@@ -839,52 +842,18 @@ paths:
       summary: Update an Subcategory
       tags:
       - subcategory
-  /user:
-    delete:
-      consumes:
-      - application/json
-      description: Delete an user
-      parameters:
-      - description: Delete User Param
-        in: query
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handlers.DeleteUserResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
-      summary: Delete an user
-      tags:
-      - user
+  /users:
     get:
       consumes:
       - application/json
-      description: Show an user
-      parameters:
-      - description: Show User Request
-        in: query
-        name: id
-        required: true
-        type: string
+      description: Show all users
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handlers.ShowUserResponse'
+            $ref: '#/definitions/handlers.ListUserResponse'
         "400":
           description: Bad Request
           schema:
@@ -893,7 +862,7 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
-      summary: Show user
+      summary: Show users
       tags:
       - user
     post:
@@ -925,13 +894,70 @@ paths:
       summary: Create an user
       tags:
       - user
+  /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an user
+      parameters:
+      - description: Delete User Param
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.DeleteUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
+      summary: Delete an user
+      tags:
+      - user
+    get:
+      consumes:
+      - application/json
+      description: Show an user
+      parameters:
+      - description: Show User Request
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ShowUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
+      summary: Show user
+      tags:
+      - user
     put:
       consumes:
       - application/json
       description: Update an user
       parameters:
       - description: User ID
-        in: query
+        in: path
         name: id
         required: true
         type: string
@@ -961,29 +987,6 @@ paths:
           schema:
             $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
       summary: Update an user
-      tags:
-      - user
-  /users:
-    get:
-      consumes:
-      - application/json
-      description: Show all users
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handlers.ListUserResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_users_handler.ErrorResponse'
-      summary: Show users
       tags:
       - user
 swagger: "2.0"

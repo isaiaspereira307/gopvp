@@ -5,8 +5,6 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/isaiaspereira307/gopvp/internal/db"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,12 +14,12 @@ import (
 // @Tags objective
 // @Accept json
 // @Produce json
-// @Param id query string true "Delete Objective Param"
+// @Param id path string true "Delete Objective Param"
 // @Success 200 {object} DeleteObjectiveResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
-// @Router /objective [delete]
-func DeleteObjective(ctx *gin.Context, queries *db.Queries) {
+// @Router /objective/{id} [delete]
+func DeleteObjective(ctx *gin.Context) {
 	id := ctx.Param("id")
 	idInt64, err := strconv.ParseInt(id, 10, 64)
 	if err != nil || idInt64 > math.MaxInt32 || idInt64 < math.MinInt32 {

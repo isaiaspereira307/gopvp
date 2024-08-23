@@ -14,14 +14,14 @@ import (
 // @Tags subcategory
 // @Accept json
 // @Produce json
-// @Param id query string true "Subcategory ID"
+// @Param id path string true "Subcategory ID"
 // @Param request body UpdateSubcategoryRequest true "Update Subcategory Request"
 // @Success 200 {object} UpdateSubcategoryResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
-// @Router /subcategory [put]
-func UpdateSubcategory(ctx *gin.Context, queries *db.Queries) {
+// @Router /subcategory/{id} [put]
+func UpdateSubcategory(ctx *gin.Context) {
 	var req UpdateSubcategoryRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, ErrorResponse{Message: "invalid request"})

@@ -15,14 +15,14 @@ import (
 // @Tags user
 // @Accept json
 // @Produce json
-// @Param id query string true "User ID"
+// @Param id path string true "User ID"
 // @Param request body UpdateUserRequest true "Update User Request"
 // @Success 200 {object} UpdateUserResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
-// @Router /user [put]
-func UpdateUser(ctx *gin.Context, queries *db.Queries) {
+// @Router /users/{id} [put]
+func UpdateUser(ctx *gin.Context) {
 	id := ctx.Param("id")
 	idInt32, err := strconv.ParseInt(id, 10, 32)
 	if err != nil {

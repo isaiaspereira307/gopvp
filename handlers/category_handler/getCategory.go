@@ -5,8 +5,6 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/isaiaspereira307/gopvp/internal/db"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,12 +14,12 @@ import (
 // @Tags category
 // @Accept json
 // @Produce json
-// @Param id query string true "Show Category Request"
+// @Param id path string true "Show Category Request"
 // @Success 200 {object} ShowCategoryResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
-// @Router /category [get]
-func GetCategory(ctx *gin.Context, queries *db.Queries) {
+// @Router /category/{id} [get]
+func GetCategory(ctx *gin.Context) {
 	id := ctx.Param("id")
 	idInt64, err := strconv.ParseInt(id, 10, 64)
 	if err != nil || idInt64 > math.MaxInt32 || idInt64 < math.MinInt32 {

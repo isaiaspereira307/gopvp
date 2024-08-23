@@ -5,8 +5,6 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/isaiaspereira307/gopvp/internal/db"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,12 +14,12 @@ import (
 // @Tags subcategory
 // @Accept json
 // @Produce json
-// @Param id query string true "Delete Subcategory Param"
+// @Param id path string true "Delete Subcategory Param"
 // @Success 200 {object} DeleteSubcategoryResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
-// @Router /subcategory [delete]
-func DeleteSubcategory(ctx *gin.Context, queries *db.Queries) {
+// @Router /subcategory/{id} [delete]
+func DeleteSubcategory(ctx *gin.Context) {
 	id := ctx.Param("id")
 	idInt64, err := strconv.ParseInt(id, 10, 64)
 	if err != nil || idInt64 > math.MaxInt32 || idInt64 < math.MinInt32 {

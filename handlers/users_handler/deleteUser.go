@@ -1,11 +1,8 @@
 package handlers
 
 import (
-	"math"
 	"net/http"
 	"strconv"
-
-	"github.com/isaiaspereira307/gopvp/internal/db"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,15 +13,15 @@ import (
 // @Tags user
 // @Accept json
 // @Produce json
-// @Param id query string true "Delete User Param"
+// @Param id path string true "Delete User Param"
 // @Success 200 {object} DeleteUserResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
-// @Router /user [delete]
-func DeleteUser(ctx *gin.Context, queries *db.Queries) {
+// @Router /users/{id} [delete]
+func DeleteUser(ctx *gin.Context) {
 	id := ctx.Param("id")
-	idInt64, err := strconv.ParseInt(id, 10, 64)
-	if err != nil || idInt64 > math.MaxInt32 || idInt64 < math.MinInt32 {
+	idInt64, err := strconv.ParseInt(id, 10, 32)
+	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
 		return
 	}

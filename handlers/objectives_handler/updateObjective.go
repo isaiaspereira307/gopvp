@@ -14,14 +14,14 @@ import (
 // @Tags objective
 // @Accept json
 // @Produce json
-// @Param id query string true "Objective ID"
+// @Param id path string true "Objective ID"
 // @Param request body UpdateObjectiveRequest true "Update Objective Request"
 // @Success 200 {object} UpdateObjectiveResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
-// @Router /objective [put]
-func UpdateObjective(ctx *gin.Context, queries *db.Queries) {
+// @Router /objective/{id} [put]
+func UpdateObjective(ctx *gin.Context) {
 	var req UpdateObjectiveRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, ErrorResponse{Message: "invalid request"})
