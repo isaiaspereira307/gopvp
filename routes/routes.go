@@ -9,79 +9,42 @@ import (
 	subcategory_handler "github.com/isaiaspereira307/gopvp/handlers/subcategory_handler"
 	users_handlers "github.com/isaiaspereira307/gopvp/handlers/users_handler"
 	"github.com/isaiaspereira307/gopvp/internal/db"
-	"github.com/isaiaspereira307/gopvp/middleware"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func InitializeRoutes(router *gin.Engine, queries *db.Queries) {
+	users_handlers.InitializeUserHandlers(queries)
+	category_handler.InitializeCategoryHandlers(queries)
+	obecjtives_handler.InitializeObjectiveHandlers(queries)
+	subcategory_handler.InitializeSubcategoryHandlers(queries)
 	basePath := "/api/v1"
 	docs.SwaggerInfo.BasePath = basePath
 	v1 := router.Group(basePath)
 	{
-		v1.GET("/user/:id", middleware.AuthMiddleware(), func(ctx *gin.Context) {
-			users_handlers.GetUser(ctx, queries)
-		})
-		v1.GET("/users", func(ctx *gin.Context) {
-			users_handlers.GetUsers(ctx)
-		})
-		v1.POST("/user", func(ctx *gin.Context) {
-			users_handlers.CreateUser(ctx)
-		})
-		v1.PUT("/user/:id", func(ctx *gin.Context) {
-			users_handlers.UpdateUser(ctx, queries)
-		})
-		v1.DELETE("/user/:id", func(ctx *gin.Context) {
-			users_handlers.DeleteUser(ctx, queries)
-		})
+		v1.GET("/users", users_handlers.GetUsers)
+		v1.GET("/users/:id", users_handlers.GetUser)
+		v1.POST("/users", users_handlers.CreateUser)
+		v1.PUT("/users/:id", users_handlers.UpdateUser)
+		v1.DELETE("/users/:id", users_handlers.DeleteUser)
 
-		v1.GET("/category/:id", func(ctx *gin.Context) {
-			category_handler.GetCategory(ctx, queries)
-		})
-		v1.GET("/categories", func(ctx *gin.Context) {
-			category_handler.GetCategories(ctx)
-		})
-		v1.POST("/category", func(ctx *gin.Context) {
-			category_handler.CreateCategory(ctx)
-		})
-		v1.PUT("/category/:id", func(ctx *gin.Context) {
-			category_handler.UpdateCategory(ctx, queries)
-		})
-		v1.DELETE("/category/:id", func(ctx *gin.Context) {
-			category_handler.DeleteCategory(ctx, queries)
-		})
+		v1.GET("/category/:id", category_handler.GetCategory)
+		v1.GET("/categories", category_handler.GetCategories)
+		v1.POST("/category", category_handler.CreateCategory)
+		v1.PUT("/category/:id", category_handler.UpdateCategory)
+		v1.DELETE("/category/:id", category_handler.DeleteCategory)
 
-		v1.GET("/objective/:id", func(ctx *gin.Context) {
-			obecjtives_handler.GetObjective(ctx, queries)
-		})
-		v1.GET("/objectives", func(ctx *gin.Context) {
-			obecjtives_handler.GetObjectives(ctx)
-		})
-		v1.POST("/objective", func(ctx *gin.Context) {
-			obecjtives_handler.CreateObjective(ctx)
-		})
-		v1.PUT("/objective/:id", func(ctx *gin.Context) {
-			obecjtives_handler.UpdateObjective(ctx, queries)
-		})
-		v1.DELETE("/objective/:id", func(ctx *gin.Context) {
-			obecjtives_handler.DeleteObjective(ctx, queries)
-		})
+		v1.GET("/objective/:id", obecjtives_handler.GetObjective)
+		v1.GET("/objectives", obecjtives_handler.GetObjectives)
+		v1.POST("/objective", obecjtives_handler.CreateObjective)
+		v1.PUT("/objective/:id", obecjtives_handler.UpdateObjective)
+		v1.DELETE("/objective/:id", obecjtives_handler.DeleteObjective)
 
-		v1.GET("/subcategory/:id", func(ctx *gin.Context) {
-			subcategory_handler.GetSubcategory(ctx, queries)
-		})
-		v1.GET("/subcategories", func(ctx *gin.Context) {
-			subcategory_handler.GetSubcategories(ctx)
-		})
-		v1.POST("/subcategory", func(ctx *gin.Context) {
-			subcategory_handler.CreateSubcategory(ctx)
-		})
-		v1.PUT("/subcategory/:id", func(ctx *gin.Context) {
-			subcategory_handler.UpdateSubcategory(ctx, queries)
-		})
-		v1.DELETE("/subcategory/:id", func(ctx *gin.Context) {
-			subcategory_handler.DeleteSubcategory(ctx, queries)
-		})
+		v1.GET("/subcategory/:id", subcategory_handler.GetSubcategory)
+		v1.GET("/subcategories", subcategory_handler.GetSubcategories)
+		v1.POST("/subcategory", subcategory_handler.CreateSubcategory)
+		v1.PUT("/subcategory/:id", subcategory_handler.UpdateSubcategory)
+		v1.DELETE("/subcategory/:id", subcategory_handler.DeleteSubcategory)
 
 		v1.POST("/login", func(ctx *gin.Context) {
 			handlers.Login(ctx, queries)
