@@ -245,6 +245,27 @@ definitions:
       message:
         type: string
     type: object
+  handlers.RegisterRequest:
+    properties:
+      email:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - first_name
+    - last_name
+    - password
+    type: object
+  handlers.RegisterResponse:
+    properties:
+      token:
+        type: string
+    type: object
   handlers.ShowCategoryResponse:
     properties:
       data:
@@ -397,6 +418,12 @@ paths:
       - application/json
       description: Create a Category
       parameters:
+      - default: token=xxx
+        description: token
+        in: header
+        name: Cookie
+        required: true
+        type: string
       - description: Create Category Params
         in: body
         name: request
@@ -694,6 +721,36 @@ paths:
       summary: Show Objectives
       tags:
       - objective
+  /register:
+    post:
+      consumes:
+      - application/json
+      description: Register
+      parameters:
+      - description: Register Params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.RegisterResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers.ErrorResponse'
+      summary: Register
+      tags:
+      - register
   /subcategories:
     get:
       consumes:

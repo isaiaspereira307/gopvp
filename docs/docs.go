@@ -65,6 +65,14 @@ const docTemplate = `{
                 "summary": "Create a Category",
                 "parameters": [
                     {
+                        "type": "string",
+                        "default": "token=xxx",
+                        "description": "token",
+                        "name": "Cookie",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "description": "Create Category Params",
                         "name": "request",
                         "in": "body",
@@ -504,6 +512,52 @@ const docTemplate = `{
                         "description": "Not Found",
                         "schema": {
                             "$ref": "#/definitions/github_com_isaiaspereira307_gopvp_handlers_objectives_handler.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "description": "Register",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "register"
+                ],
+                "summary": "Register",
+                "parameters": [
+                    {
+                        "description": "Register Params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.RegisterRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.RegisterResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gopvp_handlers.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gopvp_handlers.ErrorResponse"
                         }
                     }
                 }
@@ -1330,6 +1384,37 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "handlers.RegisterRequest": {
+            "type": "object",
+            "required": [
+                "email",
+                "first_name",
+                "last_name",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "handlers.RegisterResponse": {
+            "type": "object",
+            "properties": {
+                "token": {
                     "type": "string"
                 }
             }

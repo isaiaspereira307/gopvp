@@ -6,8 +6,6 @@ import (
 )
 
 func InitializeAuthRoutes(router *gin.Engine) {
-	v1 := router.Group("/api/v1")
-	{
-		v1.POST("/login", handlers.Login)
-	}
+	router.POST("/login", handlers.Login)
+	router.POST("/register", handlers.Register)
 }
