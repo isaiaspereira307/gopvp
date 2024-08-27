@@ -7,3 +7,11 @@ host = "localhost"
 user = "postgres" 
 pass = "postgres"
 name = "api-gopvp"
+
+[cors]
+allow_origins = ["http://localhost:3000", "http://localhost"]
+allow_methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
+allow_headers = ["Origin", "Content-Type", "Accept"]
+expose_headers = ["Content-Length"]
+allow_credentials = true
+max_age = 43200  # Em segundos, 12 horas

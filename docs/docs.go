@@ -65,14 +65,6 @@ const docTemplate = `{
                 "summary": "Create a Category",
                 "parameters": [
                     {
-                        "type": "string",
-                        "default": "token=xxx",
-                        "description": "token",
-                        "name": "Cookie",
-                        "in": "header",
-                        "required": true
-                    },
-                    {
                         "description": "Create Category Params",
                         "name": "request",
                         "in": "body",

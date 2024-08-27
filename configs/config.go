@@ -8,8 +8,9 @@ var (
 )
 
 type config struct {
-	API APIConfig
-	DB  DBConfig
+	API  APIConfig
+	DB   DBConfig
+	CORS CORSConfig
 }
 
 type APIConfig struct {
@@ -23,6 +24,15 @@ type DBConfig struct {
 	User     string
 	Password string
 	Database string
+}
+
+type CORSConfig struct {
+	AllowOrigins     []string
+	AllowMethods     []string
+	AllowHeaders     []string
+	ExposeHeaders    []string
+	AllowCredentials bool
+	MaxAge           int
 }
 
 func init() {
@@ -53,6 +63,14 @@ func Load() error {
 		Password: viper.GetString("database.pass"),
 		Database: viper.GetString("database.name"),
 	}
+	cfg.CORS = CORSConfig{
+		AllowOrigins:     viper.GetStringSlice("cors.allow_origins"),
+		AllowMethods:     viper.GetStringSlice("cors.allow_methods"),
+		AllowHeaders:     viper.GetStringSlice("cors.allow_headers"),
+		ExposeHeaders:    viper.GetStringSlice("cors.expose_headers"),
+		AllowCredentials: viper.GetBool("cors.allow_credentials"),
+		MaxAge:           viper.GetInt("cors.max_age"),
+	}
 	return nil
 }
 
@@ -71,4 +89,8 @@ func GetJwtSecret() string {
 func GetLogger(p string) *Logger {
 	logger = NewLogger(p)
 	return logger
+}
+
+func GetCORSConfig() CORSConfig {
+	return cfg.CORS
 }
