@@ -15,3 +15,8 @@ allow_headers = ["Origin", "Content-Type", "Accept"]
 expose_headers = ["Content-Length"]
 allow_credentials = true
 max_age = 43200  # Em segundos, 12 horas
+
+[ai]
+api_key = "<API-KEY-OPENROUTER>"
+endpoint = "https://openrouter.ai/api/v1/chat/completions"
+model = "google/gemma-2-9b-it:free"

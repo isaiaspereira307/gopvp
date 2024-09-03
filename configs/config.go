@@ -11,6 +11,7 @@ type config struct {
 	API  APIConfig
 	DB   DBConfig
 	CORS CORSConfig
+	AI   AIConfig
 }
 
 type APIConfig struct {
@@ -33,6 +34,12 @@ type CORSConfig struct {
 	ExposeHeaders    []string
 	AllowCredentials bool
 	MaxAge           int
+}
+
+type AIConfig struct {
+	ApiKey   string
+	Endpoint string
+	Model    string
 }
 
 func init() {
@@ -71,6 +78,11 @@ func Load() error {
 		AllowCredentials: viper.GetBool("cors.allow_credentials"),
 		MaxAge:           viper.GetInt("cors.max_age"),
 	}
+	cfg.AI = AIConfig{
+		ApiKey:   viper.GetString("ai.api_key"),
+		Endpoint: viper.GetString("ai.endpoint"),
+		Model:    viper.GetString("ai.model"),
+	}
 	return nil
 }
 
@@ -93,4 +105,8 @@ func GetLogger(p string) *Logger {
 
 func GetCORSConfig() CORSConfig {
 	return cfg.CORS
+}
+
+func GetAIConfig() AIConfig {
+	return cfg.AI
 }

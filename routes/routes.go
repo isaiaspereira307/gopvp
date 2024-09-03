@@ -30,5 +30,6 @@ func InitializeRoutes(router *gin.Engine, queries *db.Queries) {
 		InitializeCategoryRoutes(protected)
 		InitializeObjectiveRoutes(protected)
 		InitializeSubcategoryRoutes(protected)
+		InitializeAnalysisRoutes(protected)
 	}
 }

@@ -62,6 +62,13 @@ definitions:
       message:
         type: string
     type: object
+  github_com_isaiaspereira307_gopvp_handlers_analysis_handler.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    type: object
   github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse:
     properties:
       error_code:
@@ -266,6 +273,13 @@ definitions:
       token:
         type: string
     type: object
+  handlers.ShowAnalysisResponse:
+    properties:
+      data:
+        type: string
+      message:
+        type: string
+    type: object
   handlers.ShowCategoryResponse:
     properties:
       data:
@@ -389,6 +403,35 @@ definitions:
 info:
   contact: {}
 paths:
+  /analysis/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Show a Analysis
+      parameters:
+      - description: Show Analysis Request
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ShowAnalysisResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_analysis_handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_isaiaspereira307_gopvp_handlers_analysis_handler.ErrorResponse'
+      summary: Show Analysis
+      tags:
+      - analysis
   /categories:
     get:
       consumes:

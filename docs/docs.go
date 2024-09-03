@@ -15,6 +15,50 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/analysis/{id}": {
+            "get": {
+                "description": "Show a Analysis",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "analysis"
+                ],
+                "summary": "Show Analysis",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Show Analysis Request",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.ShowAnalysisResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gopvp_handlers_analysis_handler.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_isaiaspereira307_gopvp_handlers_analysis_handler.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/categories": {
             "get": {
                 "description": "Show all Categories",
@@ -1100,6 +1144,17 @@ const docTemplate = `{
                 }
             }
         },
+        "github_com_isaiaspereira307_gopvp_handlers_analysis_handler.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error_code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
         "github_com_isaiaspereira307_gopvp_handlers_category_handler.ErrorResponse": {
             "type": "object",
             "properties": {
@@ -1407,6 +1462,17 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "handlers.ShowAnalysisResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "string"
+                },
+                "message": {
                     "type": "string"
                 }
             }
